@@ -31,3 +31,12 @@
 # Debug files
 *.dSYM/
 *.su
+/libs/IL/il.h
+/RubikCubeVisualizer/Debug
+/RubikCubeVisualizer/x64/Debug
+/Debug
+/.vs/RubikCubeVisualizer/v14
+/RubikCubeVisualizer.VC.VC.opendb
+/RubikCubeVisualizer.VC.db
+/RubikCubeVisualizer/RubikCubeVisualizer.vcxproj.filters
+/RubikCubeVisualizer/RubikCubeVisualizer.vcxproj.user
