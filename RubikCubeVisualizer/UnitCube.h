@@ -42,7 +42,7 @@ public:
 	UnitCube& operator=(const UnitCube&) = delete;
 
 	inline float CubeSize() const { return 1.f; }
-	inline const glm::mat4 GetModelMatrix() const { return m_modelMatrix; }
+	inline const glm::mat4& GetModelMatrix() const { return m_modelMatrix; }
 	inline glm::mat4 GetNormalMatrix() const { return glm::inverse(glm::transpose(glm::mat4(m_modelMatrix))); }
 
 	UnitCube& Translate(const glm::vec3& vec);
