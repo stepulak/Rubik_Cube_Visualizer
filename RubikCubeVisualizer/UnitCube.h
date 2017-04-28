@@ -19,7 +19,7 @@ private:
 
 	glm::mat4 m_modelMatrix;
 
-	// Reset all members to initial values, doesn't destroy anything
+	// Reset all members to initial values, do not destroy anything
 	void ResetAll();
 
 	// Destroy and free content
