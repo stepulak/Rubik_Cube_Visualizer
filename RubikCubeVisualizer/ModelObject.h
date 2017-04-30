@@ -30,7 +30,6 @@ public:
 		return *this;
 	}
 
-	// Reset transformations
 	inline ModelObject& ResetTransformations() {
 		m_modelMatrix = glm::mat4(1.f);
 		return *this;
