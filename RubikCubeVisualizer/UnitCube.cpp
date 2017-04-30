@@ -163,30 +163,6 @@ void UnitCube::CreateCubeVAO(GLint positionShaderAttribute, GLint normalShaderAt
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-UnitCube& UnitCube::Translate(const glm::vec3& vec)
-{
-	m_modelMatrix = glm::translate(m_modelMatrix, vec);
-	return *this;
-}
-
-UnitCube& UnitCube::Rotate(float angle, const glm::vec3& vec)
-{
-	m_modelMatrix = glm::rotate(m_modelMatrix, angle, vec);
-	return *this;
-}
-
-UnitCube& UnitCube::Scale(const glm::vec3& vec)
-{
-	m_modelMatrix = glm::scale(m_modelMatrix, vec);
-	return *this;
-}
-
-UnitCube& UnitCube::Reset()
-{
-	m_modelMatrix = glm::mat4();
-	return *this;
-}
-
 void UnitCube::Draw(const Camera& camera, 
 	const MatrixShaderUniforms& matrixUniforms,
 	const MaterialShaderUniforms& materialUniforms) const

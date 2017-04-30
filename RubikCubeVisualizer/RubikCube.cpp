@@ -340,14 +340,14 @@ void RubikCube::DrawUnitCubeGenericRotation(const Camera& camera,
 	m_unitCube->Rotate(GetRotationAngle(), transformationVec);
 	m_unitCube->Scale(resetZerosScale(transformationVec * stickerSize));
 	m_unitCube->Draw(camera, matrixUniforms, materialUniforms);
-	m_unitCube->Reset();
+	m_unitCube->ResetTransformations();
 
 	// Static "left" side
 	if (m_rotationIndex > 0) {
 		m_unitCube->Translate(transformationVec * (m_rotationIndex * stickerSize / 2.f - cubeSize / 2.f));
 		m_unitCube->Scale(resetZerosScale(transformationVec * (m_rotationIndex * stickerSize)));
 		m_unitCube->Draw(camera, matrixUniforms, materialUniforms);
-		m_unitCube->Reset();
+		m_unitCube->ResetTransformations();
 	}
 
 	// Static "right" side
@@ -355,7 +355,7 @@ void RubikCube::DrawUnitCubeGenericRotation(const Camera& camera,
 		m_unitCube->Translate(transformationVec * (cubeSize / 2.f - (numStickers - m_rotationIndex - 1) * stickerSize / 2.f));
 		m_unitCube->Scale(resetZerosScale(transformationVec * ((numStickers - m_rotationIndex - 1) * stickerSize)));
 		m_unitCube->Draw(camera, matrixUniforms, materialUniforms);
-		m_unitCube->Reset();
+		m_unitCube->ResetTransformations();
 	}
 }
 

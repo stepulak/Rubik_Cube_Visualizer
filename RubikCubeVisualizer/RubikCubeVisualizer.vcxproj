@@ -91,7 +91,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../libs</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>../libs</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -133,6 +138,7 @@
     <ClInclude Include="LightShaderUniforms.h" />
     <ClInclude Include="MaterialShaderUniforms.h" />
     <ClInclude Include="MatrixShaderUniforms.h" />
+    <ClInclude Include="ModelObject.h" />
     <ClInclude Include="RubikCube.h" />
     <ClInclude Include="RubikCubeControl.h" />
     <ClInclude Include="ShaderProgram.h" />

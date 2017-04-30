@@ -2,58 +2,51 @@
 
 #include <glm/gtc/type_ptr.hpp>
 #include <stdexcept>
-#include <unordered_map>
+#include <array>
 
 namespace {
-	std::unordered_map<Sticker::Color, SurfaceMaterial> stickerMaterials = {
-		{ 
-			Sticker::WHITE, 
-			SurfaceMaterial(
-				glm::vec3(.05f, .05f, .05f),
-				glm::vec3(.5f, .5f, .5f),
-				glm::vec3(.7f, .7f, .7f), 4)
-		},
-		{
-			Sticker::RED,
-			SurfaceMaterial(
-				glm::vec3(.05f, .0f, 0.f),
-				glm::vec3(.5f, .4f,	.4f),
-				glm::vec3(.7f, .04f, .04f),	4)
-		},
-		{
-			Sticker::BLUE,
-			SurfaceMaterial(
-				glm::vec3(.0f, .0f, .05f),
-				glm::vec3(.4f, .4f,	.5f),
-				glm::vec3(.04f, .04f, .7f),	4)
-		},
-		{
-			Sticker::ORANGE,
-			SurfaceMaterial(
-				glm::vec3(.05f, .02f, 0.f),
-				glm::vec3(.5f, .25f, .0f),
-				glm::vec3(.7f, .35f, .04f),	4)
-		},
-		{
-			Sticker::GREEN,
-			SurfaceMaterial(
-				glm::vec3(.0f, .05f, .0f),
-				glm::vec3(.4f, .5f,	.4f),
-				glm::vec3(.04f, .7f, .04f),	4)
-		},
-		{
-			Sticker::YELLOW,
-			SurfaceMaterial(
-				glm::vec3(.05f, .05f, 0.f),
-				glm::vec3(.5f, .5f,	.4f),
-				glm::vec3(.7f, .7f, .04f), 4)
-		},
+	std::array<SurfaceMaterial, 6> stickerMaterials = {
+		// White
+		SurfaceMaterial(
+			glm::vec3(.05f, .05f, .05f),
+			glm::vec3(.5f, .5f, .5f),
+			glm::vec3(.7f, .7f, .7f), 4),
+
+		// Red
+		SurfaceMaterial(
+			glm::vec3(.05f, .0f, 0.f),
+			glm::vec3(.5f, .4f,	.4f),
+			glm::vec3(.7f, .04f, .04f),	4),
+
+		// Blue
+		SurfaceMaterial(
+			glm::vec3(.0f, .0f, .05f),
+			glm::vec3(.4f, .4f,	.5f),
+			glm::vec3(.04f, .04f, .7f),	4),
+		
+		// Orange
+		SurfaceMaterial(
+			glm::vec3(.05f, .02f, 0.f),
+			glm::vec3(.5f, .25f, .0f),
+			glm::vec3(.7f, .35f, .04f),	4),
+		
+		// Green
+		SurfaceMaterial(
+			glm::vec3(.0f, .05f, .0f),
+			glm::vec3(.4f, .5f,	.4f),
+			glm::vec3(.04f, .7f, .04f),	4),
+		
+		// Yellow
+		SurfaceMaterial(
+			glm::vec3(.05f, .05f, 0.f),
+			glm::vec3(.5f, .5f,	.4f),
+			glm::vec3(.7f, .7f, .04f), 4),
 	};
 }
 
 const SurfaceMaterial& Sticker::GetStickerMaterial(Sticker::Color color)
 {
-	return stickerMaterials[color];
+	return stickerMaterials[static_cast<unsigned int>(color)];
 }
 
 Sticker::Sticker(GLint positionShaderAttribute, GLint normalShaderAttribute)
