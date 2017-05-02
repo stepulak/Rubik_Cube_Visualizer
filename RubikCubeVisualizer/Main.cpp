@@ -11,7 +11,7 @@ namespace {
 	
 	const int WINDOW_WIDTH = 800;
 	const int WINDOW_HEIGHT = 600;
-	const int DELTA_TIME = 1000.f / 30;
+	const float DELTA_TIME = 1000.f / 30;
 	const float MAX_ROTATION_DIST = 30.f;
 
 	int glutWindow;
