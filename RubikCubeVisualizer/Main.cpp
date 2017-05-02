@@ -11,7 +11,7 @@ namespace {
 	
 	const int WINDOW_WIDTH = 800;
 	const int WINDOW_HEIGHT = 600;
-	const int DELTA_FPS = 1000 / 30;
+	const int DELTA_TIME = 1000 / 30;
 	const float MAX_ROTATION_DIST = 30.f;
 
 	int glutWindow;
@@ -104,7 +104,7 @@ namespace {
 		}
 
 		// FYI delta time is overkill for this simple animation
-		rubikCube->Update(1.f / DELTA_FPS);
+		rubikCube->Update(1.f / DELTA_TIME);
 	}
 
 	void Display()
@@ -210,7 +210,7 @@ namespace {
 
 	void Timer(int value)
 	{
-		glutTimerFunc(DELTA_FPS, Timer, 0);
+		glutTimerFunc(DELTA_TIME, Timer, 0);
 		glutPostRedisplay();
 	}
 
@@ -260,7 +260,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(MouseButton);
 	glutMotionFunc(MouseMotion);
 	glutMouseWheelFunc(::WheelMotion);
-	glutTimerFunc(DELTA_FPS, Timer, 0);
+	glutTimerFunc(DELTA_TIME, Timer, 0);
 
 	glutMainLoop();
 
