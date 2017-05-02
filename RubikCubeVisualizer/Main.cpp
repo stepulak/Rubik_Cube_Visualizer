@@ -210,7 +210,7 @@ namespace {
 
 	void Timer(int value)
 	{
-		glutTimerFunc(DELTA_TIME, Timer, 0);
+		glutTimerFunc(static_cast<unsigned int>(DELTA_TIME), Timer, 0);
 		glutPostRedisplay();
 	}
 
@@ -260,7 +260,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(MouseButton);
 	glutMotionFunc(MouseMotion);
 	glutMouseWheelFunc(::WheelMotion);
-	glutTimerFunc(DELTA_TIME, Timer, 0);
+	glutTimerFunc(static_cast<unsigned int>(DELTA_TIME), Timer, 0);
 
 	glutMainLoop();
 
