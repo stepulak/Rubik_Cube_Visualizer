@@ -33,7 +33,7 @@ namespace {
 	int prevMouseX = -1;
 	int prevMouseY = -1;
 
-	void InitializeUniforms()
+	void InitializeShaderVariables()
 	{
 		// in attributes
 		positionAttribute = glGetAttribLocation(shader->GetProgram(), "position");
@@ -66,11 +66,19 @@ namespace {
 		glClearDepth(1.0f);
 		glEnable(GL_DEPTH_TEST);
 
-		shader = std::make_unique<ShaderProgram>("VertexShader.glsl", "FragmentShader.glsl");
-		InitializeUniforms();
+		try {
+			shader = std::make_unique<ShaderProgram>("VertexShader.glsl", "FragmentShader.glsl");
+			InitializeShaderVariables();
 
-		rubikCube = std::make_shared<RubikCube>(positionAttribute, normalAttribute, 3);
-		rubikCubeControl = std::make_unique<RubikCubeControl>(rubikCube);
+			rubikCube = std::make_shared<RubikCube>(positionAttribute, normalAttribute, 3);
+			rubikCubeControl = std::make_unique<RubikCubeControl>(rubikCube);
+		}
+		catch (const std::exception& ex) {
+			std::cout << "Exception catch: " << ex.what() << std::endl;
+			std::cout << "Press enter to exit\n";
+			std::cin.get();
+			exit(EXIT_FAILURE);
+		}
 	}
 
 	void Destroy()
@@ -117,6 +125,7 @@ namespace {
 
 		shader->SetActive();
 		SetupLight();
+		SetupEyePosition();
 		rubikCube->Draw(camera, matrixUniforms, materialUniforms);
 		shader->SetInactive();
 

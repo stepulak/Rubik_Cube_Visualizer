@@ -110,7 +110,7 @@ public:
 	RubikCube& operator=(const RubikCube&) = delete;
 
 	// Number of stickers per edge = Cube's level
-	inline unsigned int GetNumStickersPerEdge() const { return m_faces[0].size(); }
+	inline unsigned int GetNumStickersPerEdge() const { return static_cast<unsigned int>(m_faces[0].size()); }
 	inline bool IsRotating() const { return m_rotationType != NONE; }
 
 	// Rotate one of the cube's faces
