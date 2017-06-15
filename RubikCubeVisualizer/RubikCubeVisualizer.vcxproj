@@ -152,6 +152,11 @@
     <None Include="FragmentShader.glsl" />
     <None Include="VertexShader.glsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\libs\DevIL.lib" />
+    <Library Include="..\libs\freeglut.lib" />
+    <Library Include="..\libs\glew32s.lib" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
