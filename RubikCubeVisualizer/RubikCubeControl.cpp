@@ -6,7 +6,7 @@
 #include <sstream>
 #include <algorithm>
 
-RubikCubeControl::RubikCubeControl(std::shared_ptr<RubikCube> rubikCube)
+RubikCubeControl::RubikCubeControl(const std::shared_ptr<RubikCube>& rubikCube)
 	: m_rubikCube(rubikCube),
 	m_running(true)
 {

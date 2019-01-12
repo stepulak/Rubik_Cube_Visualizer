@@ -25,10 +25,10 @@ private:
 
 public:
 
-	RubikCubeControl(std::shared_ptr<RubikCube> rubikCube);
+	RubikCubeControl(const std::shared_ptr<RubikCube>& rubikCube);
 	~RubikCubeControl();
 
-	inline bool IsRunning() const { return m_running; }
+	bool IsRunning() const { return m_running; }
 };
 
 #endif

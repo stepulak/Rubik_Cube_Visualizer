@@ -2,11 +2,6 @@
 
 #include <stdexcept>
 
-const float Camera::ZOOM_Q = 1.1f;
-const float Camera::ROTATION_Q = 0.005f;
-const float Camera::MAX_RADIUS = 12.f;
-const float Camera::MIN_RADIUS = 2.f;
-
 Camera::Camera(float windowWidth, float windowHeight)
 {
 	Resize(windowWidth, windowHeight);

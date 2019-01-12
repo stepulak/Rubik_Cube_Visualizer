@@ -33,12 +33,12 @@ public:
 
 	const ShaderProgram& operator=(const ShaderProgram&) = delete;
 
-	inline void SetActive() const { glUseProgram(m_program); }
-	inline void SetInactive() const { glUseProgram(0); }
+	void SetActive() const { glUseProgram(m_program); }
+	void SetInactive() const { glUseProgram(0); }
 
-	inline GLuint GetVertexShader() const { return m_vertexShader; }
-	inline GLuint GetFragmentShader() const { return m_fragmentShader; }
-	inline GLuint GetProgram() const { return m_program; }
+	GLuint GetVertexShader() const { return m_vertexShader; }
+	GLuint GetFragmentShader() const { return m_fragmentShader; }
+	GLuint GetProgram() const { return m_program; }
 };
 
 #endif

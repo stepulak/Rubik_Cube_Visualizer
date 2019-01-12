@@ -10,10 +10,10 @@
 class Camera {
 private:
 
-	static const float ZOOM_Q;
-	static const float ROTATION_Q;
-	static const float MAX_RADIUS;
-	static const float MIN_RADIUS;
+	static constexpr float ZOOM_Q = 1.1f;
+	static constexpr float ROTATION_Q = 0.005f;
+	static constexpr float MAX_RADIUS = 12.f;
+	static constexpr float MIN_RADIUS = 2.f;
 
 	glm::mat4 m_projectionMatrix;
 	glm::vec3 m_eyePosition;
@@ -28,10 +28,10 @@ public:
 	Camera(float windowWidth, float windowHeight);
 	virtual ~Camera() {}
 
-	inline const glm::mat4& GetProjectionMatrix() const { return m_projectionMatrix; }
-	inline const glm::vec3& GetEyePosition() const { return m_eyePosition; }
-	inline glm::mat4 GetMatrix() const { return m_projectionMatrix * GetViewMatrix(); }
-	inline glm::mat4 GetViewMatrix() const { return glm::lookAt(m_eyePosition, glm::vec3(0.f), glm::vec3(0.f, 1.f, 0.f)); }
+	const glm::mat4& GetProjectionMatrix() const { return m_projectionMatrix; }
+	const glm::vec3& GetEyePosition() const { return m_eyePosition; }
+	glm::mat4 GetMatrix() const { return m_projectionMatrix * GetViewMatrix(); }
+	glm::mat4 GetViewMatrix() const { return glm::lookAt(m_eyePosition, glm::vec3(0.f), glm::vec3(0.f, 1.f, 0.f)); }
 	
 	void Resize(float windowWidth, float windowHeight);
 

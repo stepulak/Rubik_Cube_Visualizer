@@ -69,8 +69,8 @@ GLuint ShaderProgram::LoadShader(const std::string& shaderPath, GLenum shaderTyp
 		throw std::runtime_error("Unable to create shader using glCreateShader " + shaderPath);
 	}
 
-	std::string&& content = ss.str();
-	const char* shaderContent = content.c_str();
+	auto content = ss.str();
+	auto shaderContent = content.c_str();
 
 	glShaderSource(shader, 1, &shaderContent, nullptr);
 	glCompileShader(shader);
