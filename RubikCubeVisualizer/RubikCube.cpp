@@ -1,6 +1,7 @@
 #include "RubikCube.h"
 #include <glm/gtx/transform.hpp>
 #include <fstream>
+#include <mutex>
 
 RubikCube::RubikCube(GLint positionShaderAttribute, GLint normalShaderAttribute, unsigned int numStickersEdge)
 {
@@ -359,41 +360,35 @@ void RubikCube::DrawUnitCubeGenericRotation(const Camera& camera,
 
 void RubikCube::NewCube(unsigned int numStickersEdge)
 {
+	std::lock_guard<std::mutex> lock(m_mutex);
+
 	if (numStickersEdge == 0) {
 		throw std::runtime_error("Number of stickers per edge cannot be zero");
 	}
 	if (numStickersEdge > MAX_STICKERS_PER_LINE) {
 		throw std::runtime_error("Reached maximum number of stickers per line");
 	}
-
-	m_mutex.lock();
-
 	ResetAll();
 
 	for (auto& face : m_faces) {
 		face.clear();
 	}
-	
 	FillFaceWithColor(TOP, Sticker::WHITE, numStickersEdge);
 	FillFaceWithColor(BOTTOM, Sticker::YELLOW, numStickersEdge);
 	FillFaceWithColor(FRONT, Sticker::RED, numStickersEdge);
 	FillFaceWithColor(BACK, Sticker::ORANGE, numStickersEdge);
 	FillFaceWithColor(LEFT, Sticker::GREEN, numStickersEdge);
 	FillFaceWithColor(RIGHT, Sticker::BLUE, numStickersEdge);
-
-	m_mutex.unlock();
 }
 
 void RubikCube::LoadFromFile(const std::string& filepath)
 {
+	std::lock_guard<std::mutex> lock(m_mutex);
 	std::fstream file(filepath, std::fstream::in);
 
 	if (!file.good()) {
 		throw std::runtime_error("Unable to open save file");
 	}
-
-	m_mutex.lock();
-
 	unsigned int numStickersPerEdge;
 	file >> numStickersPerEdge;
 	
@@ -401,7 +396,6 @@ void RubikCube::LoadFromFile(const std::string& filepath)
 	for (auto& face : m_faces) {
 		face.clear();
 	}
-	
 	unsigned int stickerColorIndex;
 
 	// Fill faces with different sticker's colors
@@ -418,21 +412,17 @@ void RubikCube::LoadFromFile(const std::string& filepath)
 			}
 		}
 	}
-
 	file.close();
-	m_mutex.unlock();
 }
 
 void RubikCube::SaveIntoFile(const std::string& filepath) const
 {
+	std::lock_guard<std::mutex> lock(m_mutex);
 	std::fstream file(filepath, std::fstream::out);
 
 	if (!file.good()) {
 		throw std::runtime_error("Unable to create file for saving");
 	}
-	
-	m_mutex.lock();
-
 	file << GetNumStickersPerEdge() << std::endl;
 	
 	for (auto& face : m_faces) {
@@ -444,35 +434,30 @@ void RubikCube::SaveIntoFile(const std::string& filepath) const
 		}
 		file << std::endl;
 	}
-	
 	file.close();
-	m_mutex.unlock();
 }
 
 bool RubikCube::Rotate(RubikCube::RotationType rotationType, unsigned int rotationIndex, bool rotationClockwise)
 {
+	std::lock_guard<std::mutex> lock(m_mutex);
+
 	if (rotationIndex >= GetNumStickersPerEdge()) {
 		throw std::runtime_error("Rotation index is larger than number of stickers!");
 	}
 	if (m_rotationType != NONE) {
 		return false;
 	}
-
-	m_mutex.lock();
-
 	m_rotationType = rotationType;
 	m_rotationIndex = rotationIndex;
 	m_rotationClockwise = rotationClockwise;
 	m_rotationTimer = 0.f;
-	
-	m_mutex.unlock();
 
 	return true;
 }
 
 void RubikCube::Update(float deltaTime)
 {
-	m_mutex.lock();
+	std::lock_guard<std::mutex> lock(m_mutex);
 
 	if (m_rotationType != NONE) {
 		m_rotationTimer += deltaTime;
@@ -490,15 +475,13 @@ void RubikCube::Update(float deltaTime)
 			m_rotationType = NONE;
 		}
 	}
-
-	m_mutex.unlock();
 }
 
 void RubikCube::Draw(const Camera& camera,
 	const MatrixShaderUniforms& matrixUniforms,
 	const MaterialShaderUniforms& materialUniforms) const
 {
-	m_mutex.lock();
+	std::lock_guard<std::mutex> lock(m_mutex);
 
 	switch (m_rotationType) {
 	case NONE:
@@ -514,6 +497,4 @@ void RubikCube::Draw(const Camera& camera,
 		DrawCubeZAxisRotation(camera, matrixUniforms, materialUniforms);
 		break;
 	}
-
-	m_mutex.unlock();
 }

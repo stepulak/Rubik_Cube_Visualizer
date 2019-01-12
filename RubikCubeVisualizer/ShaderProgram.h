@@ -19,9 +19,9 @@ private:
 
 	// Reset all values to 0, doesn't destroy anything
 	void ResetAll();
+	void CreateProgram();
 
 	static GLuint LoadShader(const std::string& shaderPath, GLenum shaderType);
-	void CreateProgram();
 
 public:
 
@@ -31,7 +31,8 @@ public:
 	ShaderProgram(const ShaderProgram&) = delete;
 	ShaderProgram(ShaderProgram&& s);
 
-	const ShaderProgram& operator=(const ShaderProgram&) = delete;
+	ShaderProgram& operator=(const ShaderProgram&) = delete;
+	ShaderProgram& operator=(ShaderProgram&& s);
 
 	void SetActive() const { glUseProgram(m_program); }
 	void SetInactive() const { glUseProgram(0); }

@@ -20,11 +20,17 @@ ShaderProgram::~ShaderProgram()
 
 ShaderProgram::ShaderProgram(ShaderProgram&& s)
 {
+	*this = std::move(s);
+}
+
+ShaderProgram & ShaderProgram::operator=(ShaderProgram && s)
+{
 	DestroyAll();
 	m_vertexShader = s.m_vertexShader;
 	m_fragmentShader = s.m_fragmentShader;
 	m_program = s.m_program;
 	s.ResetAll();
+	return *this;
 }
 
 void ShaderProgram::DestroyAll()
