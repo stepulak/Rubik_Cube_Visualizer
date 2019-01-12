@@ -306,7 +306,7 @@ void RubikCube::DrawCubeZAxisRotation(const Camera& camera,
 	DrawFace(FRONT, (m_rotationIndex == numStickers - 1) ? rotationMat : identityMat, 0, 0,
 		numStickers, numStickers, camera, matrixUniforms, materialUniforms);
 
-	for (auto&& face : { TOP, RIGHT, LEFT, BOTTOM }) {
+	for (auto face : { TOP, RIGHT, LEFT, BOTTOM }) {
 		auto i = (face == BOTTOM) ? numStickers - m_rotationIndex - 1 : m_rotationIndex;
 
 		DrawFace(face, rotationMat, 0, i, numStickers, i + 1, camera, matrixUniforms, materialUniforms);
